@@ -1,0 +1,27 @@
+<mat-card>
+  <button mat-raised-button color="primary" (click)="novaTurma()">Adicionar Turma</button>
+  <mat-table [dataSource]="turmas">
+
+    <ng-container matColumnDef="nome">
+      <mat-header-cell *matHeaderCellDef> Turma </mat-header-cell>
+      <mat-cell *matCellDef="let turma"> {{ turma.nome }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="acoes">
+      <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
+      <mat-cell *matCellDef="let turma">
+        <button mat-icon-button aria-label="Detalhes da Turma" (click)="detalhes(turma)">
+          <mat-icon>assignment</mat-icon>
+        </button>
+
+        <button mat-icon-button aria-label="Remover Turma">
+          <mat-icon >delete</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+  </mat-table>
+</mat-card>

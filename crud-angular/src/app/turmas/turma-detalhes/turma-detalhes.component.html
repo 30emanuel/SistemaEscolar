@@ -1,0 +1,24 @@
+<mat-card *ngIf="turma">
+  <mat-card-header>
+    <h2>{{ turma.nome }} Alunos</h2>
+    <button color="primary" mat-raised-button (click)="voltar()">Voltar</button>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-table [dataSource]="turma.alunos">
+
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+        <mat-cell *matCellDef="let aluno"> {{ aluno.id }} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="nome">
+        <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+        <mat-cell *matCellDef="let aluno"> {{ aluno.nome }} </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+  </mat-card-content>
+</mat-card>
