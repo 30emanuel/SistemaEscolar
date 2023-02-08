@@ -1,5 +1,6 @@
+import { Turma } from './../../shared/models/turma';
 import { ActivatedRoute } from '@angular/router';
-import { TurmasService } from './../services/turmas.service';
+import { TurmasService } from '../../shared/services/turmas.service';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 
@@ -11,7 +12,7 @@ import { Location } from '@angular/common';
 export class TurmaDetalhesComponent implements OnInit {
 
   id!: number
-  turma: any
+  turma!: Turma
   readonly displayedColumns = ['id','nome']
 
   constructor(

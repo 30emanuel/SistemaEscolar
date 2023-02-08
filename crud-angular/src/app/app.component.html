@@ -1,5 +1,13 @@
 <mat-toolbar color="primary">
   <span>SistemaEscolar</span>
-  <a mat-button routerLink="turmas">Turmas</a>
+  <button mat-button [matMenuTriggerFor]="turmasMenu">Turmas</button>
+  <mat-menu #turmasMenu="matMenu" xPosition="before">
+    <button mat-menu-item routerLink="/turmas">Lista</button>
+    <button mat-menu-item routerLink="/turmas/novo">Nova Turma</button>
+  </mat-menu>
+  <button mat-button [matMenuTriggerFor]="alunosMenu">Alunos</button>
+  <mat-menu #alunosMenu="matMenu" xPosition="before">
+    <button mat-menu-item routerLink="/alunos/novo">Novo Aluno</button>
+  </mat-menu>
 </mat-toolbar>
 <router-outlet></router-outlet>

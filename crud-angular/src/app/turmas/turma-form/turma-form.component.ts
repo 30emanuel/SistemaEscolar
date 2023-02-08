@@ -1,4 +1,5 @@
-import { TurmasService } from './../services/turmas.service';
+import { Router } from '@angular/router';
+import { TurmasService } from '../../shared/services/turmas.service';
 import { Component } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
@@ -17,7 +18,7 @@ export class TurmaFormComponent {
   constructor(
     private formBuilder: NonNullableFormBuilder,
     private turmasService: TurmasService,
-    private location: Location
+    private router: Router
   ){}
 
   enviar(){
@@ -29,7 +30,7 @@ export class TurmaFormComponent {
   }
 
   cancelar(){
-    this.location.back()
+    this.router.navigate(['turmas/'])
   }
 
 }

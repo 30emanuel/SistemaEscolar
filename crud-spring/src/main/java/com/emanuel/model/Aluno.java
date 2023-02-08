@@ -22,8 +22,8 @@ public class Aluno {
     @Column(length = 50, nullable = false)
     private String nome;
   
-    @JsonBackReference
     @ManyToOne
+    @JsonBackReference
     @JoinColumn(name = "turma_id")
     private Turma turma;
 

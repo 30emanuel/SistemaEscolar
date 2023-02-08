@@ -1,3 +1,4 @@
+import { Turma } from './../models/turma';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 
@@ -14,7 +15,7 @@ export class TurmasService {
     return this.http.get<any[]>(this.API)
   }
 
-  novaTurma(turma: any){
+  novaTurma(turma: Partial<Turma>){
     return this.http.post(this.API, turma)
   }
 

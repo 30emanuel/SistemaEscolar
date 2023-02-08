@@ -1,4 +1,5 @@
-import { TurmasService } from './../services/turmas.service';
+import { Turma } from './../../shared/models/turma';
+import { TurmasService } from '../../shared/services/turmas.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -9,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class TurmasListaComponent implements OnInit {
 
-  turmas: any[] = []
+  turmas: Turma[] = []
   readonly displayedColumns = ['nome', 'acoes']
 
   constructor(
@@ -31,7 +32,7 @@ export class TurmasListaComponent implements OnInit {
     this.router.navigate(['novo'], {relativeTo: this.route})
   }
 
-  detalhes(turma: any){
+  detalhes(turma: Turma){
     this.router.navigate([`detalhes/${turma.id}`], {relativeTo: this.route})
   }
 
