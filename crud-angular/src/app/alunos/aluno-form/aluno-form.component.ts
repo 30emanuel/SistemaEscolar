@@ -1,10 +1,11 @@
+import { Aluno } from './../../shared/models/aluno';
 import { Turma } from './../../shared/models/turma';
 import { Location } from '@angular/common';
-import { AlunosService } from './../services/alunos.service';
+import { AlunosService } from '../../shared/services/alunos.service';
 import { Component, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { TurmasService } from 'src/app/shared/services/turmas.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-aluno-form',
@@ -14,6 +15,7 @@ import { Router } from '@angular/router';
 export class AlunoFormComponent implements OnInit {
 
   form = this.formBuilder.group({
+    id: [''],
     nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
     turma: this.formBuilder.group({
       id: ['', [Validators.required]]
@@ -27,20 +29,25 @@ export class AlunoFormComponent implements OnInit {
     private turmasService: TurmasService,
     private alunosService: AlunosService,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private route: ActivatedRoute
   ){}
 
   ngOnInit(): void {
     this.turmasService.list().subscribe(
       res => this.turmas = res
     )
+    const aluno: Aluno = this.route.snapshot.data['aluno']
+    this.form.patchValue({
+      id: aluno.id,
+      nome: aluno.nome
+    })
   }
 
   enviar(){
     if(this.form.valid){
-      this.alunosService.novoAluno(this.form.value).subscribe(
+      this.alunosService.salvar(this.form.value).subscribe(
         res => {
-          console.log('Aluno salvo'),
           this.router.navigate(['turmas/detalhes/', this.form.value.turma?.id])
         }
       )

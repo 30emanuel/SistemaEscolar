@@ -13,8 +13,10 @@
         <button mat-icon-button aria-label="Detalhes da Turma" (click)="detalhes(turma)">
           <mat-icon>assignment</mat-icon>
         </button>
-
-        <button mat-icon-button aria-label="Remover Turma">
+        <button mat-icon-button aria-label="Editar Turma" (click)="editar(turma)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button aria-label="Remover Turma" (click)="remover(turma)">
           <mat-icon >delete</mat-icon>
         </button>
       </mat-cell>

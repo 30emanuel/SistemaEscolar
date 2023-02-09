@@ -12,14 +12,19 @@ export class TurmasService {
   constructor(private http: HttpClient) { }
 
   list(){
-    return this.http.get<any[]>(this.API)
+    return this.http.get<Turma[]>(this.API)
   }
 
-  novaTurma(turma: Partial<Turma>){
+  salvar(turma: Partial<Turma>){
     return this.http.post(this.API, turma)
   }
 
   buscarTurma(id: number){
-    return this.http.get<any>(`${this.API}/${id}`)
+    return this.http.get<Turma>(`${this.API}/${id}`)
   }
+
+  remover(id: string){
+    return this.http.delete(`${this.API}/${id}`)
+  }
+
 }

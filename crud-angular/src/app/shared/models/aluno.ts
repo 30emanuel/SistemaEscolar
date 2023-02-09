@@ -1,7 +1,7 @@
 export interface Aluno {
-  id: number,
+  id: string,
   nome: string,
   turma:[
-    id: number
+    id: string
   ]
 }

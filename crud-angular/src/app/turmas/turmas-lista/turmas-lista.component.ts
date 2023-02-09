@@ -20,10 +20,13 @@ export class TurmasListaComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.carregarTurmas()
+  }
+
+  carregarTurmas(){
     this.turmasService.list().subscribe(
       res => {
         this.turmas = res
-        console.log(this.turmas)
       }
     )
   }
@@ -34,6 +37,17 @@ export class TurmasListaComponent implements OnInit {
 
   detalhes(turma: Turma){
     this.router.navigate([`detalhes/${turma.id}`], {relativeTo: this.route})
+  }
+
+  editar(turma: Turma){
+    this.router.navigate([`editar/${turma.id}`], {relativeTo: this.route})
+  }
+
+  remover(turma: Turma){
+    this.turmasService.remover(turma.id).subscribe(
+      res => this.carregarTurmas(),
+      error => window.alert('Voce não pode remover uma Turma que tem Alunos')
+    )
   }
 
 }

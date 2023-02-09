@@ -1,3 +1,4 @@
+import { TurmaResolver } from './guard/turma.resolver';
 import { TurmaDetalhesComponent } from './turma-detalhes/turma-detalhes.component';
 import { TurmaFormComponent } from './turma-form/turma-form.component';
 import { TurmasListaComponent } from './turmas-lista/turmas-lista.component';
@@ -7,8 +8,9 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', component: TurmasListaComponent },
-  { path: 'novo', component: TurmaFormComponent},
-  { path: 'detalhes/:id', component: TurmaDetalhesComponent}
+  { path: 'novo', component: TurmaFormComponent, resolve: {turma: TurmaResolver}},
+  { path: 'detalhes/:id', component: TurmaDetalhesComponent},
+  { path: 'editar/:id', component: TurmaFormComponent, resolve: {turma: TurmaResolver}}
 ];
 
 @NgModule({

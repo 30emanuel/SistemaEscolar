@@ -16,6 +16,18 @@
         <mat-cell *matCellDef="let aluno"> {{ aluno.nome }} </mat-cell>
       </ng-container>
 
+      <ng-container matColumnDef="acoes">
+        <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
+        <mat-cell *matCellDef="let aluno">
+          <button mat-icon-button aria-label="Editar Turma" (click)="editar(aluno)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button aria-label="Remover Turma" (click)="deletar(aluno)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-cell>
+      </ng-container>
+
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 

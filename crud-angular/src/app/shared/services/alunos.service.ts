@@ -1,3 +1,4 @@
+import { Aluno } from '../models/aluno';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -12,8 +13,16 @@ export class AlunosService {
     private http: HttpClient
   ) { }
 
-  novoAluno(aluno: any){
+  salvar(aluno: any){
     return this.http.post(this.API, aluno)
+  }
+
+  buscarAluno(id: string){
+    return this.http.get(`${this.API}/${id}`)
+  }
+
+  deletar(aluno: Aluno){
+    return this.http.delete(`${this.API}/${aluno.id}`)
   }
 
 }
