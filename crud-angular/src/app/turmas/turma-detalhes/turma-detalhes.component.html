@@ -19,10 +19,10 @@
       <ng-container matColumnDef="acoes">
         <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
         <mat-cell *matCellDef="let aluno">
-          <button mat-icon-button aria-label="Editar Turma" (click)="editar(aluno)">
+          <button mat-icon-button aria-label="Editar Aluno" (click)="editar(aluno)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button aria-label="Remover Turma" (click)="deletar(aluno)">
+          <button mat-icon-button aria-label="Remover Aluno" (click)="deletar(aluno)">
             <mat-icon>delete</mat-icon>
           </button>
         </mat-cell>
@@ -34,3 +34,4 @@
     </mat-table>
   </mat-card-content>
 </mat-card>
+<button *ngIf="!turma && error" color="primary" mat-raised-button (click)="voltar()">Voltar</button>

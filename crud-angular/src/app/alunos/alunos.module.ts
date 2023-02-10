@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -15,7 +16,8 @@ import { AlunosRoutingModule } from './alunos-routing.module';
     CommonModule,
     AppMaterialModule,
     ReactiveFormsModule,
-    AlunosRoutingModule
+    AlunosRoutingModule,
+    SharedModule
   ]
 })
 export class AlunosModule { }

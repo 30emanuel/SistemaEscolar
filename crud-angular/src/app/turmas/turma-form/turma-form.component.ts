@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { TurmasService } from '../../shared/services/turmas.service';
 import { Component, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { ErroDialogComponent } from 'src/app/shared/erro-dialog/erro-dialog.component';
 
 @Component({
   selector: 'app-turma-form',
@@ -20,7 +22,8 @@ export class TurmaFormComponent implements OnInit {
     private formBuilder: NonNullableFormBuilder,
     private turmasService: TurmasService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialog: MatDialog
   ){}
 
   ngOnInit(): void {
@@ -34,13 +37,22 @@ export class TurmaFormComponent implements OnInit {
   enviar(){
     if(this.form.valid){
       this.turmasService.salvar(this.form.value).subscribe(
-        res => this.cancelar()
+        res => this.cancelar(),
+        error => this.erro('Erro ao salvar turma.')
       )
+    }else{
+      this.erro('Preencha todos os campos')
     }
   }
 
   cancelar(){
     this.router.navigate(['turmas/'])
+  }
+
+  erro(msgErro: string){
+    this.dialog.open(ErroDialogComponent,{
+      data: msgErro
+    })
   }
 
 }

@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { TurmasService } from 'src/app/shared/services/turmas.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { ErroDialogComponent } from 'src/app/shared/erro-dialog/erro-dialog.component';
 
 @Component({
   selector: 'app-aluno-form',
@@ -30,12 +32,14 @@ export class AlunoFormComponent implements OnInit {
     private alunosService: AlunosService,
     private router: Router,
     private location: Location,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialog: MatDialog
   ){}
 
   ngOnInit(): void {
     this.turmasService.list().subscribe(
-      res => this.turmas = res
+      res => this.turmas = res,
+      error => this.erro('Erro ao carregar turmas.')
     )
     const aluno: Aluno = this.route.snapshot.data['aluno']
     this.form.patchValue({
@@ -49,13 +53,22 @@ export class AlunoFormComponent implements OnInit {
       this.alunosService.salvar(this.form.value).subscribe(
         res => {
           this.router.navigate(['turmas/detalhes/', this.form.value.turma?.id])
-        }
+        },
+        error => this.erro('Erro ao salvar aluno.')
       )
+    }else{
+      this.erro('Preencha todos os campos')
     }
   }
 
   cancelar(){
     this.location.back()
+  }
+
+  erro(msgErro: string){
+    this.dialog.open(ErroDialogComponent,{
+      data: msgErro
+    })
   }
 
 }

@@ -1,22 +1,27 @@
+import { ErroDialogComponent } from './../../shared/erro-dialog/erro-dialog.component';
 import { Turma } from './../../shared/models/turma';
 import { TurmasService } from '../../shared/services/turmas.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-turmas-lista',
   templateUrl: './turmas-lista.component.html',
   styleUrls: ['./turmas-lista.component.css']
 })
-export class TurmasListaComponent implements OnInit {
+export class TurmasListaComponent implements OnInit, OnDestroy {
 
   turmas: Turma[] = []
+  private subscriptions: Subscription[] = []
   readonly displayedColumns = ['nome', 'acoes']
 
   constructor(
     private turmasService: TurmasService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit(): void {
@@ -24,10 +29,15 @@ export class TurmasListaComponent implements OnInit {
   }
 
   carregarTurmas(){
-    this.turmasService.list().subscribe(
-      res => {
-        this.turmas = res
-      }
+    this.subscriptions.push(
+      this.turmasService.list().subscribe(
+        res => {
+          this.turmas = res
+        },
+        error =>{
+          this.erro('Erro ao carregar turmas.')
+        }
+      )
     )
   }
 
@@ -44,10 +54,28 @@ export class TurmasListaComponent implements OnInit {
   }
 
   remover(turma: Turma){
-    this.turmasService.remover(turma.id).subscribe(
-      res => this.carregarTurmas(),
-      error => window.alert('Voce não pode remover uma Turma que tem Alunos')
+    this.subscriptions.push(
+      this.turmasService.remover(turma.id).subscribe(
+        res => this.carregarTurmas(),
+        error => {
+          if(error.status == 500){
+            this.erro('Impossível remover turma com alunos matriculados.')
+          }else{
+            this.erro('Erro ao remover turma.')
+          }
+        }
+      )
     )
+  }
+
+  erro(msgErro: string){
+    this.dialog.open(ErroDialogComponent,{
+      data: msgErro
+    })
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe())
   }
 
 }

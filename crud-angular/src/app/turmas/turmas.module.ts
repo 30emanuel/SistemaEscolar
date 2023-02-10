@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { AppMaterialModule } from './../shared/app-material/app-material.module';
 import { TurmasRoutingModule } from './turmas-routing.module';
 import { NgModule } from '@angular/core';
@@ -18,7 +19,8 @@ import { TurmaDetalhesComponent } from './turma-detalhes/turma-detalhes.componen
     CommonModule,
     TurmasRoutingModule,
     ReactiveFormsModule,
-    AppMaterialModule
+    AppMaterialModule,
+    SharedModule
   ]
 })
 export class TurmasModule { }
