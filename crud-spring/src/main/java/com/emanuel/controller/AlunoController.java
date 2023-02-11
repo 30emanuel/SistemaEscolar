@@ -1,5 +1,8 @@
 package com.emanuel.controller;
 
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,10 +17,10 @@ public class AlunoController {
   @Autowired
   private AlunoService alunoService;
 
-  @GetMapping("/{id}")
-  public Aluno findById(@PathVariable Long id) {
-    return alunoService.findById(id);
-  }
+  @GetMapping("/{param}")
+    public List<Aluno> findAlunoByNomeOrId(@PathVariable String param) {
+        return alunoService.findAlunoByNomeOrId(param);
+    }
   
   @PostMapping
   public Aluno save(@RequestBody Aluno aluno) {

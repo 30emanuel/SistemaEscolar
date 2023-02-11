@@ -1,6 +1,9 @@
 package com.emanuel.service;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,9 +16,23 @@ public class AlunoService {
   @Autowired
   private AlunoRepository alunoRepository;
 
-  public Aluno findById(Long id) {
-    return alunoRepository.findById(id).orElse(null);
-  }
+  public List<Aluno> findAlunoByNomeOrId(String param) {
+    List<Aluno> alunos = new ArrayList<>();
+    try {
+      long id = Long.parseLong(param);
+      Aluno aluno = alunoRepository.findById(id).orElse(null);
+      if (aluno != null) {
+        aluno.getTurma().setAlunos(new ArrayList<>());
+        alunos.add(aluno);
+      }
+    } catch (NumberFormatException e) {
+      alunos = alunoRepository.findAllByNomeContainingIgnoreCase(param);
+      for (Aluno aluno : alunos) {
+        aluno.getTurma().setAlunos(new ArrayList<>());
+      }
+    }
+    return alunos;
+  }   
 
   public Aluno save(Aluno aluno) {
     return alunoRepository.save(aluno);

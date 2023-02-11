@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,7 +25,7 @@ public class Turma {
     private String nome;
  
     @JsonManagedReference
-    @OneToMany(mappedBy = "turma")
+    @OneToMany(mappedBy = "turma", cascade = CascadeType.ALL)
     private List<Aluno> alunos;
     
 }

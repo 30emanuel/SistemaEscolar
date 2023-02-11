@@ -1,6 +1,8 @@
 package com.emanuel.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,6 +15,7 @@ import lombok.Data;
 
 @Data
 @Entity
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Aluno {
     
     @Id
@@ -23,7 +26,6 @@ public class Aluno {
     private String nome;
   
     @ManyToOne
-    @JsonBackReference
     @JoinColumn(name = "turma_id")
     private Turma turma;
 
