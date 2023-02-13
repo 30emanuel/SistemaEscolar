@@ -32,7 +32,7 @@ public class AlunoService {
       }
     }
     return alunos;
-  }   
+  } 
 
   public Aluno save(Aluno aluno) {
     return alunoRepository.save(aluno);

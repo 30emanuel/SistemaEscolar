@@ -17,13 +17,11 @@ export class TurmaDetalhesComponent implements OnInit, OnDestroy {
 
   id!: number
   turma!: Turma
-  readonly displayedColumns = ['id','nome', 'acoes']
-  private subscriptions: Subscription[] = []
+  subscriptions: Subscription[] = []
   error: boolean = false
 
   constructor(
     private turmasService: TurmasService,
-    private alunosService: AlunosService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     public dialog: MatDialog
@@ -49,19 +47,6 @@ export class TurmaDetalhesComponent implements OnInit, OnDestroy {
 
   voltar(){
     this.router.navigate(['turmas/'])
-  }
-
-  editar(aluno: Aluno){
-    this.router.navigate([`alunos/editar/${aluno.id}`])
-  }
-
-  deletar(aluno: Aluno){
-    this.subscriptions.push(
-      this.alunosService.deletar(aluno).subscribe(
-        res => this.atualizar(),
-        error => this.erro('Erro ao excluir aluno.')
-      )
-    )
   }
 
   erro(msgErro: string){

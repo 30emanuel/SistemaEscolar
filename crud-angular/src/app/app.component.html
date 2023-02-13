@@ -8,6 +8,7 @@
   <button mat-button [matMenuTriggerFor]="alunosMenu">Alunos</button>
   <mat-menu #alunosMenu="matMenu" xPosition="before">
     <button mat-menu-item routerLink="/alunos/novo">Novo Aluno</button>
+    <button mat-menu-item routerLink="/alunos/buscar">Buscar Aluno</button>
   </mat-menu>
 </mat-toolbar>
 <router-outlet style="margin: 10px;"></router-outlet>

@@ -17,8 +17,8 @@ export class AlunosService {
     return this.http.post(this.API, aluno)
   }
 
-  buscarAluno(id: string){
-    return this.http.get(`${this.API}/${id}`)
+  buscarAluno(pesquisa: any){
+    return this.http.get(`${this.API}/${pesquisa}`)
   }
 
   deletar(aluno: Aluno){

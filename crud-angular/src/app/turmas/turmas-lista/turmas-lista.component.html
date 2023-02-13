@@ -26,4 +26,5 @@
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
   </mat-table>
+  <h3 *ngIf="turmas.length == 0">Nenhuma turma encontrada</h3>
 </mat-card>

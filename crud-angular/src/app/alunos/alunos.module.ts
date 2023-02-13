@@ -5,16 +5,16 @@ import { CommonModule } from '@angular/common';
 import { AppMaterialModule } from '../shared/app-material/app-material.module';
 import { AlunoFormComponent } from './aluno-form/aluno-form.component';
 import { AlunosRoutingModule } from './alunos-routing.module';
-
+import { BuscarAlunoComponent } from './buscar-aluno/buscar-aluno.component';
 
 
 @NgModule({
   declarations: [
-    AlunoFormComponent
+    AlunoFormComponent,
+    BuscarAlunoComponent,
   ],
   imports: [
     CommonModule,
-    AppMaterialModule,
     ReactiveFormsModule,
     AlunosRoutingModule,
     SharedModule

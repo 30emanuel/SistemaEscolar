@@ -1,0 +1,41 @@
+<button mat-button aria-label="Novo Aluno" (click)="novoAluno()">Novo Aluno</button>
+<mat-table [dataSource]="alunos">
+
+  <ng-container matColumnDef="id">
+    <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+    <mat-cell *matCellDef="let aluno"> {{ aluno.id }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="nome">
+    <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
+    <mat-cell *matCellDef="let aluno"> {{ aluno.nome }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="turma">
+    <mat-header-cell *matHeaderCellDef> Turma </mat-header-cell>
+    <mat-cell *matCellDef="let aluno">
+      {{ aluno.turma ? aluno.turma.nome : 'Turma Atual' }}
+      <button mat-button *ngIf="aluno.turma" aria-label="Ver Turma"  (click)="verTurma(aluno.turma)">
+        <mat-icon >search</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="acoes">
+    <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
+    <mat-cell *matCellDef="let aluno">
+      <button mat-icon-button aria-label="Editar Aluno" (click)="editar(aluno)">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button aria-label="Remover Aluno" (click)="deletar(aluno)">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+</mat-table>
+
+<h3 *ngIf="alunos && alunos.length == 0">Nenhum aluno encontrado</h3>

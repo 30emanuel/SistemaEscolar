@@ -2,9 +2,6 @@ package com.emanuel.model;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,8 +21,7 @@ public class Turma {
     @Column
     private String nome;
  
-    @JsonManagedReference
-    @OneToMany(mappedBy = "turma", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "turma")
     private List<Aluno> alunos;
     
 }

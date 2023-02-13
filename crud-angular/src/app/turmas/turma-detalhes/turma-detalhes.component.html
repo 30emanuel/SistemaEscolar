@@ -4,34 +4,10 @@
     <button color="primary" mat-raised-button (click)="voltar()">Voltar</button>
   </mat-card-header>
   <mat-card-content>
-    <mat-table [dataSource]="turma.alunos">
-
-      <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
-        <mat-cell *matCellDef="let aluno"> {{ aluno.id }} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="nome">
-        <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
-        <mat-cell *matCellDef="let aluno"> {{ aluno.nome }} </mat-cell>
-      </ng-container>
-
-      <ng-container matColumnDef="acoes">
-        <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
-        <mat-cell *matCellDef="let aluno">
-          <button mat-icon-button aria-label="Editar Aluno" (click)="editar(aluno)">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button aria-label="Remover Aluno" (click)="deletar(aluno)">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </mat-cell>
-      </ng-container>
-
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-
-    </mat-table>
+    <app-alunos-lista
+    [alunos]="turma.alunos"
+    (atualizarLista)="atualizar()"
+    ></app-alunos-lista>
   </mat-card-content>
 </mat-card>
 <button *ngIf="!turma && error" color="primary" mat-raised-button (click)="voltar()">Voltar</button>

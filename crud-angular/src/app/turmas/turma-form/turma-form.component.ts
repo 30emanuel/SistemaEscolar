@@ -1,22 +1,25 @@
 import { Turma } from './../../shared/models/turma';
 import { Router, ActivatedRoute } from '@angular/router';
 import { TurmasService } from '../../shared/services/turmas.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ErroDialogComponent } from 'src/app/shared/erro-dialog/erro-dialog.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-turma-form',
   templateUrl: './turma-form.component.html',
   styleUrls: ['./turma-form.component.css']
 })
-export class TurmaFormComponent implements OnInit {
+export class TurmaFormComponent implements OnInit, OnDestroy {
 
   form = this.formBuilder.group({
     id: [''],
     nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]]
   })
+
+  subscriptions: Subscription[] = []
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
@@ -36,9 +39,11 @@ export class TurmaFormComponent implements OnInit {
 
   enviar(){
     if(this.form.valid){
-      this.turmasService.salvar(this.form.value).subscribe(
-        res => this.cancelar(),
-        error => this.erro('Erro ao salvar turma.')
+      this.subscriptions.push(
+        this.turmasService.salvar(this.form.value).subscribe(
+          res => this.cancelar(),
+          error => this.erro('Erro ao salvar turma.')
+        )
       )
     }else{
       this.erro('Preencha todos os campos')
@@ -53,6 +58,10 @@ export class TurmaFormComponent implements OnInit {
     this.dialog.open(ErroDialogComponent,{
       data: msgErro
     })
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe())
   }
 
 }
