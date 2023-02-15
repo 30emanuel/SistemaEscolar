@@ -39,8 +39,11 @@ export class AlunosListaComponent implements OnDestroy {
   }
 
   verTurma(turma: Turma){
-    console.log(turma)
-    this.router.navigate([`turmas/detalhes/${turma.id}`])
+    this.router.navigate([`turmas/${turma.id}`])
+  }
+
+  verAluno(aluno: Aluno){
+    this.router.navigate([`alunos/${aluno.id}`])
   }
 
   novoAluno(){

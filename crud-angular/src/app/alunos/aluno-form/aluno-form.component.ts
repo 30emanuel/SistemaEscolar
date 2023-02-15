@@ -32,7 +32,6 @@ export class AlunoFormComponent implements OnInit, OnDestroy {
     private formBuilder: NonNullableFormBuilder,
     private turmasService: TurmasService,
     private alunosService: AlunosService,
-    private router: Router,
     private location: Location,
     private route: ActivatedRoute,
     public dialog: MatDialog
@@ -56,13 +55,10 @@ export class AlunoFormComponent implements OnInit, OnDestroy {
     if(this.form.valid){
       this.subscriptions.push(
         this.alunosService.salvar(this.form.value).subscribe(
-          res => {},
-          error => {
-            this.erro('Erro ao salvar aluno.')
-          }
+          res => this.location.back(),
+          error => this.erro('Erro ao salvar aluno.')
         )
       )
-      this.router.navigate(['turmas/detalhes/', this.form.value.turma?.id])
     }else{
       this.erro('Preencha todos os campos')
     }

@@ -1,0 +1,52 @@
+<mat-card>
+    <mat-card-header>
+      <h2>{{ aluno.nome }}
+        <button mat-icon-button (click)="editarAluno()">
+          <mat-icon>edit</mat-icon>
+        </button>
+      </h2>
+      <button mat-raised-button (click)="voltar()">Voltar</button>
+    </mat-card-header>
+    <mat-card-content>
+      <h3>Turma: {{aluno.turma.nome}}
+        <button mat-button aria-label="Ver Turma"  (click)="verTurma()">
+          <mat-icon >search</mat-icon>
+        </button>
+      </h3>
+      <button mat-button (click)="criarNota()">Criar Nota</button>
+      <mat-table [dataSource]="aluno.notas">
+
+        <ng-container matColumnDef="disciplina">
+          <mat-header-cell *matHeaderCellDef> Disciplina </mat-header-cell>
+          <mat-cell *matCellDef="let nota"> {{ nota.disciplina }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="nota">
+          <mat-header-cell *matHeaderCellDef> Nota </mat-header-cell>
+          <mat-cell *matCellDef="let nota"> {{ nota.nota.toFixed(1) }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="bimestre">
+          <mat-header-cell *matHeaderCellDef> Bimestre </mat-header-cell>
+          <mat-cell *matCellDef="let nota"> {{ nota.bimestre }} </mat-cell>
+        </ng-container>
+
+
+        <ng-container matColumnDef="acoes">
+          <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
+          <mat-cell *matCellDef="let nota">
+            <button mat-icon-button >
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button >
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+      </mat-table>
+    </mat-card-content>
+</mat-card>

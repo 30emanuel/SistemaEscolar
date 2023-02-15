@@ -22,14 +22,10 @@ public class AlunoService {
       long id = Long.parseLong(param);
       Aluno aluno = alunoRepository.findById(id).orElse(null);
       if (aluno != null) {
-        aluno.getTurma().setAlunos(new ArrayList<>());
         alunos.add(aluno);
       }
     } catch (NumberFormatException e) {
       alunos = alunoRepository.findAllByNomeContainingIgnoreCase(param);
-      for (Aluno aluno : alunos) {
-        aluno.getTurma().setAlunos(new ArrayList<>());
-      }
     }
     return alunos;
   } 

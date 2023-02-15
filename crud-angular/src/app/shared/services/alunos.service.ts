@@ -25,4 +25,8 @@ export class AlunosService {
     return this.http.delete(`${this.API}/${aluno.id}`)
   }
 
+  salvarNota(alunoId: string, nota: any){
+    return this.http.post(`${this.API}/${alunoId}/notas`, nota)
+  }
+
 }

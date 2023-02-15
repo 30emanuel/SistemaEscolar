@@ -46,7 +46,7 @@ export class TurmasListaComponent implements OnInit, OnDestroy {
   }
 
   detalhes(turma: Turma){
-    this.router.navigate([`detalhes/${turma.id}`], {relativeTo: this.route})
+    this.router.navigate([`${turma.id}`], {relativeTo: this.route})
   }
 
   editar(turma: Turma){

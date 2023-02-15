@@ -9,7 +9,7 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   { path: '', component: TurmasListaComponent },
   { path: 'novo', component: TurmaFormComponent, resolve: {turma: TurmaResolver}},
-  { path: 'detalhes/:id', component: TurmaDetalhesComponent},
+  { path: ':id', component: TurmaDetalhesComponent},
   { path: 'editar/:id', component: TurmaFormComponent, resolve: {turma: TurmaResolver}}
 ];
 

@@ -8,7 +8,12 @@
 
   <ng-container matColumnDef="nome">
     <mat-header-cell *matHeaderCellDef> Nome </mat-header-cell>
-    <mat-cell *matCellDef="let aluno"> {{ aluno.nome }} </mat-cell>
+    <mat-cell *matCellDef="let aluno">
+      {{ aluno.nome }}
+      <button mat-button aria-label="Ver Aluno"  (click)="verAluno(aluno)">
+        <mat-icon >search</mat-icon>
+      </button>
+    </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="turma">
