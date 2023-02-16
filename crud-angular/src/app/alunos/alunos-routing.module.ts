@@ -8,11 +8,11 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 const routes: Routes = [
-  { path: 'novo', component: AlunoFormComponent, resolve: {aluno: AlunoResolver}},
+  { path: 'novo', component: AlunoFormComponent},
   { path: 'buscar', component: BuscarAlunoComponent},
   { path: 'editar/:id', component: AlunoFormComponent, resolve: {aluno: AlunoResolver}},
-  { path: ':id', component: AlunoDetalhesComponent, resolve: {aluno: AlunoResolver} },
-  { path: ':id/novanota', component: NotaFormComponent }
+  { path: ':id', component: AlunoDetalhesComponent},
+  { path: ':id/novanota', component: NotaFormComponent },
 ];
 
 @NgModule({

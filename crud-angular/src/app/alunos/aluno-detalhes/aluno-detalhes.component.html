@@ -1,11 +1,11 @@
-<mat-card>
+<mat-card *ngIf="aluno">
     <mat-card-header>
       <h2>{{ aluno.nome }}
         <button mat-icon-button (click)="editarAluno()">
           <mat-icon>edit</mat-icon>
         </button>
       </h2>
-      <button mat-raised-button (click)="voltar()">Voltar</button>
+      <button mat-raised-button color="primary" (click)="voltar()">Voltar</button>
     </mat-card-header>
     <mat-card-content>
       <h3>Turma: {{aluno.turma.nome}}
@@ -21,9 +21,9 @@
           <mat-cell *matCellDef="let nota"> {{ nota.disciplina }} </mat-cell>
         </ng-container>
 
-        <ng-container matColumnDef="nota">
-          <mat-header-cell *matHeaderCellDef> Nota </mat-header-cell>
-          <mat-cell *matCellDef="let nota"> {{ nota.nota.toFixed(1) }} </mat-cell>
+        <ng-container matColumnDef="valor">
+          <mat-header-cell *matHeaderCellDef> Valor </mat-header-cell>
+          <mat-cell *matCellDef="let nota"> {{ nota.valor.toFixed(1) }} </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="bimestre">
@@ -35,10 +35,7 @@
         <ng-container matColumnDef="acoes">
           <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
           <mat-cell *matCellDef="let nota">
-            <button mat-icon-button >
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-icon-button >
+            <button mat-icon-button (click)="deletarNota(nota)">
               <mat-icon>delete</mat-icon>
             </button>
           </mat-cell>

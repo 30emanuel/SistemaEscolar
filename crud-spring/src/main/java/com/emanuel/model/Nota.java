@@ -32,6 +32,6 @@ public class Nota {
     private Integer bimestre;
 
     @Column
-    private Double nota;
+    private Double valor;
 
 }

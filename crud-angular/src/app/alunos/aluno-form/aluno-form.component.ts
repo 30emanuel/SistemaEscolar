@@ -42,8 +42,8 @@ export class AlunoFormComponent implements OnInit, OnDestroy {
       res => this.turmas = res,
       error => this.erro('Erro ao carregar turmas.')
     )
-    const aluno: Aluno = this.route.snapshot.data['aluno'][0]
-    if(aluno){
+    if(this.route.snapshot.data['aluno']){
+      const aluno: Aluno = this.route.snapshot.data['aluno'][0]
       this.form.patchValue({
         id: aluno.id,
         nome: aluno.nome

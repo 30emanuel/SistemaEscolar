@@ -11,16 +11,16 @@ import { Observable, of } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class AlunoResolver implements Resolve<Partial<Aluno>> {
+export class AlunoResolver implements Resolve<Aluno[]> {
 
   constructor(
     private service: AlunosService
   ){}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Partial<Aluno>> {
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Aluno[]> {
     if(route.params && route.params['id']){
       return this.service.buscarAluno(route.params['id'])
     }
-    return of({id: '', nome: ''});
+    return of([]);
   }
 }

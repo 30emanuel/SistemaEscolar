@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Aluno } from '../models/aluno';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -17,16 +18,20 @@ export class AlunosService {
     return this.http.post(this.API, aluno)
   }
 
-  buscarAluno(pesquisa: any){
-    return this.http.get(`${this.API}/${pesquisa}`)
+  buscarAluno(pesquisa: any): Observable<Aluno[]> {
+    return this.http.get<Aluno[]>(`${this.API}/${pesquisa}`)
   }
 
   deletar(aluno: Aluno){
     return this.http.delete(`${this.API}/${aluno.id}`)
   }
 
-  salvarNota(alunoId: string, nota: any){
-    return this.http.post(`${this.API}/${alunoId}/notas`, nota)
+  salvarNota(nota: any){
+    return this.http.post(`${this.API}/notas`, nota)
+  }
+
+  deletarNota(nota: any){
+    return this.http.delete(`${this.API}/notas/${nota.id}`)
   }
 
 }

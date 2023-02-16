@@ -42,13 +42,13 @@ public class AlunoController {
     alunoService.deleteById(id);
   }
 
-  @PostMapping("/{id}/notas")
-  public Nota saveNota(@PathVariable Long id, @RequestBody Nota nota) {
-    return notaService.save(id, nota);
+  @PostMapping("/notas")
+  public Nota saveNota(@RequestBody Nota nota) {
+    return notaService.save(nota);
   }
 
-  @DeleteMapping("/{id}/notas/{idNota}")
-  public void deleteNota(@PathVariable Long id, @PathVariable Long idNota){
-    notaService.delete(idNota);
+  @DeleteMapping("/notas/{id}")
+  public void deleteNota(@PathVariable Long id){
+    notaService.delete(id);
   }
 }

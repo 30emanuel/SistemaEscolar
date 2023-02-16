@@ -1,5 +1,3 @@
-import { AlunosService } from './../../shared/services/alunos.service';
-import { Aluno } from './../../shared/models/aluno';
 import { Turma } from './../../shared/models/turma';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TurmasService } from '../../shared/services/turmas.service';

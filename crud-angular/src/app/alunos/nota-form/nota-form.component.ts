@@ -13,12 +13,13 @@ import { Location } from '@angular/common';
 export class NotaFormComponent implements OnInit {
 
   form = this.formBuilder.group({
+    aluno: this.formBuilder.group({
+      id: ['', [Validators.required]]
+    }),
     disciplina: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-    nota: ['', [Validators.required, Validators.min(0)]],
+    valor: ['', [Validators.required, Validators.min(0)]],
     bimestre: ['', [Validators.required, Validators.min(1)]]
   })
-
-  alunoId!: string
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
@@ -29,13 +30,17 @@ export class NotaFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(
-      params => this.alunoId = params['id']
+      params => this.form.patchValue({
+        aluno:{
+          id: params['id']
+        }
+      })
     )
   }
 
   enviar(){
     if(this.form.valid){
-      this.alunosService.salvarNota(this.alunoId, this.form.value).subscribe(
+      this.alunosService.salvarNota(this.form.value).subscribe(
         res => this.cancelar()
       )
     }

@@ -1,7 +1,10 @@
+import { AlunosService } from './../../shared/services/alunos.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Aluno } from 'src/app/shared/models/aluno';
 import {Location} from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { ErroDialogComponent } from 'src/app/shared/erro-dialog/erro-dialog.component';
 
 @Component({
   selector: 'app-aluno-detalhes',
@@ -11,16 +14,28 @@ import {Location} from '@angular/common';
 export class AlunoDetalhesComponent implements OnInit {
 
   aluno!: Aluno
-  readonly displayedColumns = ['disciplina','nota','bimestre', 'acoes']
+  id!: number
+  readonly displayedColumns = ['disciplina','valor','bimestre', 'acoes']
 
   constructor(
     private route: ActivatedRoute,
     private location: Location,
-    private router: Router
-  ){}
+    private router: Router,
+    private alunosService: AlunosService,
+    public dialog: MatDialog
+  ){
+    this.route.params.subscribe(params => this.id = params['id'])
+  }
 
   ngOnInit(): void {
-    this.aluno = this.route.snapshot.data['aluno'][0]
+    this.atualizar()
+  }
+
+  atualizar(){
+    this.alunosService.buscarAluno(this.id).subscribe(
+      res => this.aluno = res[0] as Aluno,
+      error => this.erro('Erro ao carregar aluno.')
+    )
   }
 
   voltar(){
@@ -37,6 +52,19 @@ export class AlunoDetalhesComponent implements OnInit {
 
   verTurma(){
     this.router.navigate([`turmas/${this.aluno.turma.id}`])
+  }
+
+  deletarNota(nota: any){
+    this.alunosService.deletarNota(nota).subscribe(
+      res => this.atualizar(),
+      error => this.erro('Erro ao excluir nota.')
+    )
+  }
+
+  erro(msgErro: string){
+    this.dialog.open(ErroDialogComponent,{
+      data: msgErro
+    })
   }
 
 }
