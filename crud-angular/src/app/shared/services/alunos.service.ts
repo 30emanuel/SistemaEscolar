@@ -34,4 +34,8 @@ export class AlunosService {
     return this.http.delete(`${this.API}/notas/${nota.id}`)
   }
 
+  buscarNota(id: string){
+    return this.http.get(`${this.API}/notas/${id}`)
+  }
+
 }

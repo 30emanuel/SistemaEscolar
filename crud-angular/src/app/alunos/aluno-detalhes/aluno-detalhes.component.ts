@@ -61,6 +61,10 @@ export class AlunoDetalhesComponent implements OnInit {
     )
   }
 
+  editarNota(nota: any){
+    this.router.navigate([`alunos/editarnota/${nota.id}`])
+  }
+
   erro(msgErro: string){
     this.dialog.open(ErroDialogComponent,{
       data: msgErro

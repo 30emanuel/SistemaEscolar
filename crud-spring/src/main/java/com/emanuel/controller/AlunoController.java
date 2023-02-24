@@ -51,4 +51,10 @@ public class AlunoController {
   public void deleteNota(@PathVariable Long id){
     notaService.delete(id);
   }
+
+  @GetMapping("/notas/{id}")
+  public Nota findNota(@PathVariable Long id){
+    return notaService.findNotaById(id);
+  }
+
 }

@@ -22,7 +22,7 @@ public class Nota {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "aluno_id", nullable = false)
-    @JsonIgnoreProperties("notas")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "turma", "notas"})
     private Aluno aluno;
 
     @Column

@@ -21,4 +21,8 @@ public class NotaService {
         notaRepository.deleteById(id);
     }
 
+    public Nota findNotaById(Long id){
+        return notaRepository.findById(id).orElse(null);
+    }
+
 }

@@ -33,7 +33,7 @@ export class AlunosListaComponent implements OnDestroy {
     this.subscriptions.push(
       this.alunosService.deletar(aluno).subscribe(
         res => this.atualizar(),
-        error => this.erro('Erro ao excluir aluno.')
+        error => error.status === 500 ? this.erro('Não é possivel excluir um aluno com notas.') : this.erro('Erro ao excluir aluno.')
       )
     )
   }

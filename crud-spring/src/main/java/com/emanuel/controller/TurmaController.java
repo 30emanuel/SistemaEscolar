@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import com.emanuel.model.Turma;
 import com.emanuel.service.TurmaService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -19,6 +20,9 @@ public class TurmaController {
   @GetMapping
   public ResponseEntity<List<Turma>> findAll() {
     List<Turma> turmas = turmaService.findAll();
+    for (Turma turma : turmas) {
+      turma.setAlunos(new ArrayList<>());
+    }
     return ResponseEntity.ok().body(turmas);
   }
 

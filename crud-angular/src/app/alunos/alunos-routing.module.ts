@@ -1,3 +1,4 @@
+import { NotaResolver } from './guard/nota.resolver';
 import { NotaFormComponent } from './nota-form/nota-form.component';
 import { AlunoDetalhesComponent } from './aluno-detalhes/aluno-detalhes.component';
 import { BuscarAlunoComponent } from './buscar-aluno/buscar-aluno.component';
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'editar/:id', component: AlunoFormComponent, resolve: {aluno: AlunoResolver}},
   { path: ':id', component: AlunoDetalhesComponent},
   { path: ':id/novanota', component: NotaFormComponent },
+  { path: 'editarnota/:id', component: NotaFormComponent, resolve: {nota: NotaResolver}}
 ];
 
 @NgModule({

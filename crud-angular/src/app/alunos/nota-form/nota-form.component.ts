@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
+import { ErroDialogComponent } from 'src/app/shared/erro-dialog/erro-dialog.component';
 
 
 @Component({
@@ -13,6 +15,7 @@ import { Location } from '@angular/common';
 export class NotaFormComponent implements OnInit {
 
   form = this.formBuilder.group({
+    id: [''],
     aluno: this.formBuilder.group({
       id: ['', [Validators.required]]
     }),
@@ -25,29 +28,53 @@ export class NotaFormComponent implements OnInit {
     private formBuilder: NonNullableFormBuilder,
     private route: ActivatedRoute,
     private alunosService: AlunosService,
-    private location: Location
+    private location: Location,
+    public dialog: MatDialog
   ){}
 
   ngOnInit(): void {
-    this.route.params.subscribe(
-      params => this.form.patchValue({
-        aluno:{
-          id: params['id']
-        }
+
+    if(this.route.snapshot.data['nota']){
+      const nota = this.route.snapshot.data['nota']
+      this.form.patchValue({
+        id: nota.id,
+        aluno: {
+          id: nota.aluno.id
+        },
+        disciplina: nota.disciplina,
+        valor: nota.valor,
+        bimestre: nota.bimestre
       })
-    )
+    }else{
+      this.route.params.subscribe(
+        params => this.form.patchValue({
+          aluno:{
+            id: params['id']
+          }
+        })
+      )
+    }
   }
 
   enviar(){
     if(this.form.valid){
       this.alunosService.salvarNota(this.form.value).subscribe(
-        res => this.cancelar()
+        res => this.cancelar(),
+        error => this.erro('Erro ao salvar nota.')
       )
+    }else{
+      this.erro('Preencha todos os campos.')
     }
   }
 
   cancelar(){
     this.location.back()
+  }
+
+  erro(msgErro: string){
+    this.dialog.open(ErroDialogComponent,{
+      data: msgErro
+    })
   }
 
 }

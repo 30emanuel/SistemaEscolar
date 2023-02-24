@@ -35,6 +35,9 @@
         <ng-container matColumnDef="acoes">
           <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
           <mat-cell *matCellDef="let nota">
+            <button mat-icon-button aria-label="Editar Aluno" (click)="editarNota(nota)">
+              <mat-icon>edit</mat-icon>
+            </button>
             <button mat-icon-button (click)="deletarNota(nota)">
               <mat-icon>delete</mat-icon>
             </button>

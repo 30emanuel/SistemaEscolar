@@ -57,13 +57,7 @@ export class TurmasListaComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.turmasService.remover(turma.id).subscribe(
         res => this.carregarTurmas(),
-        error => {
-          if(error.status == 500){
-            this.erro('Impossível remover turma com alunos matriculados.')
-          }else{
-            this.erro('Erro ao remover turma.')
-          }
-        }
+        error => error.status === 500 ? this.erro('Não é possivel excluir uma turma com alunos matriculados.') : this.erro('Erro ao excluir aluno.')
       )
     )
   }
