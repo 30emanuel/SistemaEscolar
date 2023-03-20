@@ -16,7 +16,7 @@ export class AlunosListaComponent implements OnDestroy {
 
   @Input() alunos!: Aluno[]
   @Output() atualizarLista = new EventEmitter(false);
-  readonly displayedColumns = ['id','nome', 'turma', 'acoes']
+  readonly displayedColumns = ['id','nome', 'nascimento', 'turma', 'acoes']
   subscriptions: Subscription[] = []
 
   constructor(

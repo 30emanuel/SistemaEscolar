@@ -8,6 +8,14 @@
         <mat-label>Nome</mat-label>
         <input matInput formControlName="nome" placeholder="Ex: Fulano da Silva">
       </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Data de Nascimento</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="dataNascimento" [min]="dataMinima" [max]="dataAtual">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
       <mat-form-field appearance="fill" class="full-width" formGroupName="turma">
         <mat-label>Turma</mat-label>
         <mat-select formControlName="id">

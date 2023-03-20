@@ -15,7 +15,7 @@ export class TurmasListaComponent implements OnInit, OnDestroy {
 
   turmas: Turma[] = []
   private subscriptions: Subscription[] = []
-  readonly displayedColumns = ['nome', 'acoes']
+  readonly displayedColumns = ['nome','periodo', 'acoes']
 
   constructor(
     private turmasService: TurmasService,

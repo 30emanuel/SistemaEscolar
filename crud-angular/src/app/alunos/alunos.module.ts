@@ -7,6 +7,7 @@ import { AlunosRoutingModule } from './alunos-routing.module';
 import { BuscarAlunoComponent } from './buscar-aluno/buscar-aluno.component';
 import { AlunoDetalhesComponent } from './aluno-detalhes/aluno-detalhes.component';
 import { NotaFormComponent } from './nota-form/nota-form.component';
+import { DatePipe } from '@angular/common';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { NotaFormComponent } from './nota-form/nota-form.component';
     CommonModule,
     ReactiveFormsModule,
     AlunosRoutingModule,
-    SharedModule
-  ]
+    SharedModule,
+  ],
+  providers: [DatePipe]
 })
 export class AlunosModule { }

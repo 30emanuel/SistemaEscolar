@@ -16,7 +16,8 @@ export class TurmaFormComponent implements OnInit, OnDestroy {
 
   form = this.formBuilder.group({
     id: [''],
-    nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]]
+    nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+    periodo: ['', [Validators.required]]
   })
 
   subscriptions: Subscription[] = []
@@ -33,7 +34,8 @@ export class TurmaFormComponent implements OnInit, OnDestroy {
     const turma: Turma = this.route.snapshot.data['turma']
     this.form.setValue({
       id: turma.id,
-      nome: turma.nome
+      nome: turma.nome,
+      periodo: turma.periodo
     })
   }
 

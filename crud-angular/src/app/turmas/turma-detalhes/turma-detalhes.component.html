@@ -1,9 +1,15 @@
 <mat-card *ngIf="turma">
   <mat-card-header>
-    <h2>{{ turma.nome }} Alunos</h2>
+    <h2>
+      {{ turma.nome }}
+      <button mat-icon-button (click)="editarTurma()">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </h2>
     <button color="primary" mat-raised-button (click)="voltar()">Voltar</button>
   </mat-card-header>
   <mat-card-content>
+    <h3>Periodo: {{turma.periodo}}</h3>
     <app-alunos-lista
     [alunos]="turma.alunos"
     (atualizarLista)="atualizar()"

@@ -5,7 +5,7 @@ import { AlunosService } from '../../shared/services/alunos.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { TurmasService } from 'src/app/shared/services/turmas.service';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ErroDialogComponent } from 'src/app/shared/erro-dialog/erro-dialog.component';
 import { Subscription } from 'rxjs';
@@ -20,6 +20,7 @@ export class AlunoFormComponent implements OnInit, OnDestroy {
   form = this.formBuilder.group({
     id: [''],
     nome: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+    dataNascimento: [null, [Validators.required]],
     turma: this.formBuilder.group({
       id: ['', [Validators.required]]
     })
@@ -27,6 +28,9 @@ export class AlunoFormComponent implements OnInit, OnDestroy {
 
   turmas!: Turma[]
   subscriptions: Subscription[] = []
+
+  dataAtual = new Date()
+  dataMinima = new Date(new Date().getFullYear() - 100, 0, 1);
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
@@ -43,10 +47,11 @@ export class AlunoFormComponent implements OnInit, OnDestroy {
       error => this.erro('Erro ao carregar turmas.')
     )
     if(this.route.snapshot.data['aluno']){
-      const aluno: Aluno = this.route.snapshot.data['aluno'][0]
+      const aluno = this.route.snapshot.data['aluno'][0]
       this.form.patchValue({
         id: aluno.id,
-        nome: aluno.nome
+        nome: aluno.nome,
+        dataNascimento: aluno.dataNascimento
       })
     }
   }

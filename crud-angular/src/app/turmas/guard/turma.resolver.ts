@@ -24,7 +24,8 @@ export class TurmaResolver implements Resolve<Turma> {
     return of({
       id: '',
       nome: '',
+      periodo: '',
       alunos: []
-    });
+    })
   }
 }

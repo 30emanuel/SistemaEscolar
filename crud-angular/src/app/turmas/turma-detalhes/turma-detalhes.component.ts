@@ -43,6 +43,10 @@ export class TurmaDetalhesComponent implements OnInit, OnDestroy {
     )
   }
 
+  editarTurma(){
+    this.router.navigate([`turmas/editar/${this.turma.id}`])
+  }
+
   voltar(){
     this.router.navigate(['turmas/'])
   }

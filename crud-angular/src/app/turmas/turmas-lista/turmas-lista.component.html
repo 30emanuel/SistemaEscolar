@@ -7,6 +7,11 @@
       <mat-cell *matCellDef="let turma"> {{ turma.nome }} </mat-cell>
     </ng-container>
 
+    <ng-container matColumnDef="periodo">
+      <mat-header-cell *matHeaderCellDef> Período </mat-header-cell>
+      <mat-cell *matCellDef="let turma"> {{ turma.periodo }} </mat-cell>
+    </ng-container>
+
     <ng-container matColumnDef="acoes">
       <mat-header-cell *matHeaderCellDef> Ações </mat-header-cell>
       <mat-cell *matCellDef="let turma">

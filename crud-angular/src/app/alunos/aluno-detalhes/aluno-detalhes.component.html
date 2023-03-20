@@ -8,11 +8,13 @@
       <button mat-raised-button color="primary" (click)="voltar()">Voltar</button>
     </mat-card-header>
     <mat-card-content>
+      <h3>Data de nascimento: {{aluno.dataNascimento | date: 'longDate'}}</h3>
       <h3>Turma: {{aluno.turma.nome}}
         <button mat-button aria-label="Ver Turma"  (click)="verTurma()">
           <mat-icon >search</mat-icon>
         </button>
       </h3>
+      <h3>Notas:</h3>
       <button mat-button (click)="criarNota()">Criar Nota</button>
       <mat-table [dataSource]="aluno.notas">
 

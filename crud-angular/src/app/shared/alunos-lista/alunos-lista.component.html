@@ -16,6 +16,13 @@
     </mat-cell>
   </ng-container>
 
+  <ng-container matColumnDef="nascimento">
+    <mat-header-cell *matHeaderCellDef> Data Nascimento </mat-header-cell>
+    <mat-cell *matCellDef="let aluno">
+      {{ aluno.dataNascimento | date: 'longDate' }}
+    </mat-cell>
+  </ng-container>
+
   <ng-container matColumnDef="turma">
     <mat-header-cell *matHeaderCellDef> Turma </mat-header-cell>
     <mat-cell *matCellDef="let aluno">

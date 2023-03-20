@@ -1,6 +1,8 @@
 package com.emanuel.model;
 
 
+
+import java.util.Date;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -25,7 +27,10 @@ public class Aluno {
 
     @Column(length = 50, nullable = false)
     private String nome;
-  
+
+    @Column
+    private Date dataNascimento;
+    
     @ManyToOne
     @JoinColumn(name = "turma_id")
     @JsonIgnoreProperties("alunos")

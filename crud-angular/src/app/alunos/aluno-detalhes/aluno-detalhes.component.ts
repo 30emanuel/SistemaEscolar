@@ -2,7 +2,7 @@ import { AlunosService } from './../../shared/services/alunos.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Aluno } from 'src/app/shared/models/aluno';
-import {Location} from '@angular/common';
+import { Location, DatePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { ErroDialogComponent } from 'src/app/shared/erro-dialog/erro-dialog.component';
 
@@ -22,7 +22,8 @@ export class AlunoDetalhesComponent implements OnInit {
     private location: Location,
     private router: Router,
     private alunosService: AlunosService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private datePipe: DatePipe
   ){
     this.route.params.subscribe(params => this.id = params['id'])
   }

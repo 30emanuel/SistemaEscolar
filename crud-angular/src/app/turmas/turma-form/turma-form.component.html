@@ -4,9 +4,17 @@
   </mat-card-header>
   <mat-card-content>
     <form [formGroup]="form">
-      <mat-form-field appearance="fill">
+      <mat-form-field appearance="fill" class="full-width">
         <mat-label>Nome</mat-label>
         <input matInput formControlName="nome" placeholder="Ex: Turma A">
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Período</mat-label>
+        <mat-select formControlName="periodo">
+          <mat-option value="Manhã">Manhã</mat-option>
+          <mat-option value="Tarde">Tarde</mat-option>
+          <mat-option value="Noite">Noite</mat-option>
+        </mat-select>
       </mat-form-field>
     </form>
   </mat-card-content>

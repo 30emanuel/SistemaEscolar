@@ -22,6 +22,9 @@ public class Turma {
   
     @Column
     private String nome;
+
+    @Column
+    private String periodo;
  
     @OneToMany(mappedBy = "turma")
     @JsonIgnoreProperties({"turma", "notas"})
