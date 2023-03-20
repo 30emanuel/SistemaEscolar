@@ -6,6 +6,7 @@ Este projeto é um sistema escolar construído com Angular e Spring para gerenci
 - Gerenciamento de alunos (inclusão, edição, exclusão)
 - Gerenciamento de turmas (inclusão, edição, exclusão)
 - Matrícula de alunos em turmas
+- Gerenciamento de notas para os alunos (inclusão, edição, exclusão)
 
 ## Pré-requisitos
 - Angular CLI
